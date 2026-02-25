@@ -1,0 +1,15 @@
+{
+
+  // items
+  "item.magicungathering.speed_sword": "Speed Sword",
+  "item.magicungathering.mana_stick": "Mana Stick",
+
+
+  // tooltips
+  "tooltip.magicungathering.speed_sword.tooltip": "§b-40 Mana§r On right click gain speed 2 for 20 seconds.",
+  "tooltip.magicungathering.mana_stick.tooltip": "§b+40 Mana§r On right click.",
+
+
+  // creative mode tabs
+  "creativetab.magicungathering.magic_ungathered_weapons": "Magic Ungathering Weapons"
+}

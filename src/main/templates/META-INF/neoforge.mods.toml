@@ -21,7 +21,8 @@ license="${mod_license}"
 [[mods]] #mandatory
 
 # The modid of the mod
-modId="${mod_id}" #mandatory
+# this was changed because I messed up creating the mod with magicungathered and later changed.. sorry future me if this causes issues 24/02/2026, 21:06
+modId="magicungathering" #mandatory
 
 # The version number of the mod
 version="${mod_version}" #mandatory

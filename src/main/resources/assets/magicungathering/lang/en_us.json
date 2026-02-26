@@ -21,7 +21,7 @@
   "tooltip.magicungathering.dash_sword.tooltip": "§b-60 Mana§r On right click, dash forwards.",
   "tooltip.magicungathering.flash_step_sword.tooltip": "§b-100 Mana§r On right click, teleport behind the nearest player in a 8 block range, or teleport behind the nearest entity in a 20 block range.",
   "tooltip.magicungathering.slime_boots.tooltip": "Boots with built in slime block physics.",
-  "tooltip.magicungathering.crystal_launcher.tooltip": "§b-200 Mana§r Essentially a grenade launcher but with end crystals.. explodes after hitting a block or entity or after 3 seconds.",
+  "tooltip.magicungathering.crystal_launcher.tooltip": "§b-150 Mana§r Essentially a grenade launcher but with end crystals.. explodes after hitting a block or entity or after 3 seconds.",
 
   // armor
   "item.magicungathering.tier_one_robe": "Leather Robe",

@@ -2,6 +2,7 @@ package net.mp9.magicungathering;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.mp9.magicungathering.entity.ModEntities;
 import net.mp9.magicungathering.item.ModCreativeModeTabs;
 import net.mp9.magicungathering.item.ModItems;
 import net.mp9.magicungathering.mana.ManaAttachment;
@@ -21,6 +22,7 @@ public class MagicUngathering {
     public static final String MOD_ID = "magicungathering";
     public MagicUngathering(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
+        net.mp9.magicungathering.attributes.ModAttributes.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
 
@@ -34,6 +36,7 @@ public class MagicUngathering {
         ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

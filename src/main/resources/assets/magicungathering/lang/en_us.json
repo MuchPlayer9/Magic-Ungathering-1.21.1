@@ -2,18 +2,40 @@
 
   // items
   "item.magicungathering.speed_sword": "Speed Sword",
+  "item.magicungathering.strength_sword": "Strength Sword",
+  "item.magicungathering.jump_sword": "Jump Sword",
   "item.magicungathering.mana_stick": "Mana Stick",
   "item.magicungathering.dash_sword": "Dash Sword",
   "item.magicungathering.flash_step_sword": "Flash Sword",
+  "item.magicungathering.crystal_sword": "Crystal Sword",
+  "item.magicungathering.attack_speed_sword": "Attack Speed Sword",
 
-
-  // tooltips
+  // item tooltips
   "tooltip.magicungathering.speed_sword.tooltip": "§b-30 Mana§r On right click gain speed 2 for 20 seconds.",
+  "tooltip.magicungathering.strength_sword.tooltip": "§b-50 Mana§r On right click gain strength 2 for 20 seconds.",
+  "tooltip.magicungathering.jump_sword.tooltip": "§b-20 Mana§r On right click gain jump boost 4 for 10 seconds.",
+  "tooltip.magicungathering.crystal_sword.tooltip": "§b-50 Mana§r On right click, summon an end crystal on yourself, that is invulnerable for 0.3 seconds.",
+  "tooltip.magicungathering.attack_speed_sword.tooltip": "§b-80 Mana§r On right click, give haste 3 for 10 seconds, increasing mining speed by 60% and attack speed by 30%.",
   "tooltip.magicungathering.mana_stick.tooltip": "§b+400 Mana§r On right click.",
   "tooltip.magicungathering.dash_sword.tooltip": "§b-60 Mana§r On right click, dash forwards.",
   "tooltip.magicungathering.flash_step_sword.tooltip": "§b-100 Mana§r On right click, teleport behind the nearest player in a 8 block range, or teleport behind the nearest entity in a 20 block range.",
+  "tooltip.magicungathering.slime_boots.tooltip": "Boots with built in slime block physics.",
 
+  // armor
+  "item.magicungathering.tier_one_robe": "Leather Robe",
+  "item.magicungathering.tier_two_robe": "Copper Robe",
+  "item.magicungathering.tier_three_robe": "Gold Robe",
+  "item.magicungathering.tier_four_robe": "Chainmail Robe",
+  "item.magicungathering.tier_five_robe": "Iron Robe",
+  "item.magicungathering.tier_six_robe": "Diamond Robe",
+  "item.magicungathering.tier_seven_robe": "Netherite Robe",
+  "item.magicungathering.slime_boots": "Slime Boots",
+  "item.magicungathering.creative_leggings": "Creative Leggings",
 
   // creative mode tabs
-  "creativetab.magicungathering.magic_ungathered_weapons": "Magic Ungathering Weapons"
+  "creativetab.magicungathering.magic_ungathered_weapons": "Magic Ungathering Weapons",
+  "creativetab.magicungathering.magic_ungathered_armor": "Magic Ungathering Armor",
+
+  // attributes
+  "attribute.name.magicungathering.max_mana": "Max Mana"
 }

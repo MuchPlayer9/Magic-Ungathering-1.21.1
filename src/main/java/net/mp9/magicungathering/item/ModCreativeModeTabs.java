@@ -23,6 +23,21 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.MANA_STICK);
                         output.accept(ModItems.DASH_SWORD);
                         output.accept(ModItems.FLASH_STEP_SWORD);
+                        output.accept(ModItems.STRENGTH_SWORD);
+                        output.accept(ModItems.JUMP_SWORD);
+                        output.accept(ModItems.CRYSTAL_SWORD);
+                        output.accept(ModItems.ATTACK_SPEED_SWORD);
+                    }).build());
+
+    public static final Supplier<CreativeModeTab> MAGIC_UNGATHERED_ARMOR = CREATIVE_MODE_TAB.register("magic_ungathered_armor",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModItems.TIER_ONE_ROBE.get()))
+                    .title(Component.translatable("creativetab.magicungathering.magic_ungathered_armor"))
+                    .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModItems.TIER_ONE_ROBE);
+                        output.accept(ModItems.TIER_TWO_ROBE);
+                        output.accept(ModItems.SLIME_BOOTS);
+                        output.accept(ModItems.CREATIVE_LEGGINGS);
                     }).build());
 
     public static void register(IEventBus eventBus) {

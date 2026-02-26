@@ -16,7 +16,7 @@ public class ManaAttachment {
     // creates an attachment called mana, which is a string of (current mana, max mana). (sets both to 100, for new players?).
     public static final Supplier<AttachmentType<ManaData>> MANA =
             ATTACHMENT_TYPES.register("mana", () ->
-                    AttachmentType.builder(() -> new ManaData(0, 100))
+                    AttachmentType.builder(() -> new ManaData(0))
                             .serialize(ManaData.CODEC)
                             .sync(ManaData.STREAM_CODEC)
                             .copyOnDeath() // mana persists after dying

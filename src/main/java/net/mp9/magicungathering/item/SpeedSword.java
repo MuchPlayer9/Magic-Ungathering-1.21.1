@@ -33,7 +33,7 @@ public class SpeedSword extends SwordItem {
         ManaData mana = player.getData(ManaAttachment.MANA.get());
 
         // establishes the mana cost. will have to be changed if adding something like ultimate wise
-        int cost = 40;
+        int cost = 30;
         // adds a static cooldown amount in ticks
         int cooldownTicks = 100;
         // if current mana is greater than or equal to cost, i.e. make sure enough mana for ability

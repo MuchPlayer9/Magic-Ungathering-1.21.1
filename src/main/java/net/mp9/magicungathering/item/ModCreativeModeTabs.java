@@ -21,6 +21,8 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.SPEED_SWORD);
                         output.accept(ModItems.MANA_STICK);
+                        output.accept(ModItems.DASH_SWORD);
+                        output.accept(ModItems.FLASH_STEP_SWORD);
                     }).build());
 
     public static void register(IEventBus eventBus) {

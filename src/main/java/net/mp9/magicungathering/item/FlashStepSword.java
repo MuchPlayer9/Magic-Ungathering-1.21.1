@@ -1,7 +1,6 @@
 package net.mp9.magicungathering.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +23,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.mp9.magicungathering.mana.ManaAttachment;
 import net.mp9.magicungathering.mana.ManaData;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

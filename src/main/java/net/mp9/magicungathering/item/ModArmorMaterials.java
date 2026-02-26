@@ -2,20 +2,14 @@ package net.mp9.magicungathering.item;
 
 import net.mp9.magicungathering.MagicUngathering;
 import net.minecraft.Util;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 public class ModArmorMaterials {
     public static final ArmorMaterial TIER_ONE = createRobeMaterial("tier_one_robe");

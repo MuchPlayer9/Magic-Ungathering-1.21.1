@@ -19,6 +19,8 @@ public class ModClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // This links your custom entity to the vanilla End Crystal look
         event.registerEntityRenderer(ModEntities.TEMP_CRYSTAL.get(), EndCrystalRenderer::new);
+
+        event.registerEntityRenderer(ModEntities.CRYSTAL_PROJECTILE.get(), EndCrystalRenderer::new);
     }
 
     @SubscribeEvent

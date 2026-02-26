@@ -20,6 +20,14 @@ public class ModEntities {
                             .sized(2.0f, 2.0f) // Matches standard End Crystal size
                             .build("temporary_crystal"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<net.mp9.magicungathering.entity.CrystalProjectile>> CRYSTAL_PROJECTILE =
+            ENTITIES.register("crystal_projectile",
+                    () -> EntityType.Builder.<net.mp9.magicungathering.entity.CrystalProjectile>of(net.mp9.magicungathering.entity.CrystalProjectile::new, MobCategory.MISC)
+                            .sized(1.0F, 1.0F) // Set the hit-box size
+                            .clientTrackingRange(25) // how far away it stays visible
+                            .updateInterval(1) // update every tick
+                            .build("crystal_projectile"));
+
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

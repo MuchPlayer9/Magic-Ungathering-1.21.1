@@ -27,6 +27,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.JUMP_SWORD);
                         output.accept(ModItems.CRYSTAL_SWORD);
                         output.accept(ModItems.ATTACK_SPEED_SWORD);
+                        output.accept(ModItems.CRYSTAL_LAUNCHER);
                     }).build());
 
     public static final Supplier<CreativeModeTab> MAGIC_UNGATHERED_ARMOR = CREATIVE_MODE_TAB.register("magic_ungathered_armor",

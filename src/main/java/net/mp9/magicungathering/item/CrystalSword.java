@@ -2,8 +2,6 @@ package net.mp9.magicungathering.item;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -13,7 +11,6 @@ import net.mp9.magicungathering.entity.TemporaryCrystal;
 import net.mp9.magicungathering.mana.ManaAttachment;
 import net.mp9.magicungathering.mana.ManaData;
 import net.mp9.magicungathering.entity.ModEntities;
-import net.mp9.magicungathering.entity.TemporaryCrystal;
 
 public class CrystalSword extends SwordItem {
 

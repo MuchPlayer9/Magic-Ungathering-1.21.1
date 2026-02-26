@@ -5,14 +5,11 @@ import net.minecraft.world.item.component.DyedItemColor;
 import net.mp9.magicungathering.MagicUngathering;
 import net.mp9.magicungathering.attributes.ModAttributes;
 import net.minecraft.world.entity.EntityType;
-import net.mp9.magicungathering.entity.ModEntities;
-import net.mp9.magicungathering.entity.TemporaryCrystal;
 import net.mp9.magicungathering.item.ModItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 
 // IMPORTANT: This must be on the MOD bus

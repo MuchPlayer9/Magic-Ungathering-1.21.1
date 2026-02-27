@@ -10,6 +10,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.mp9.magicungathering.MagicUngathering;
 import net.mp9.magicungathering.attributes.ModAttributes;
+import net.mp9.magicungathering.item.staff.fireball.FireballStaff;
+import net.mp9.magicungathering.item.sword.*;
+import net.mp9.magicungathering.item.staff.crystal.CrystalLauncher;
+import net.mp9.magicungathering.item.staff.crystal.CrystalSword;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -97,6 +101,24 @@ public class ModItems {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.translatable("tooltip.magicungathering.crystal_launcher.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
+
+    public static final DeferredItem<Item> FIREBALL_STAFF = ITEMS.register("fireball_staff",
+            () -> new FireballStaff() {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.fireball_staff.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
+
+    public static final DeferredItem<Item> BASIC_MANA_STICK = ITEMS.register("basic_mana_stick",
+            () -> new BasicManaStick() {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.basic_mana_stick.tooltip"));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });

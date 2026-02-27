@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.item;
+package net.mp9.magicungathering.item.sword;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
@@ -16,10 +16,10 @@ import net.mp9.magicungathering.mana.ManaData;
 
 
 // defines the speed sword as a sword item
-public class AttackSpeedSword extends SwordItem {
+public class JumpSword extends SwordItem {
 
     // sets the tier of the sword to iron and max stack size to 1
-    public AttackSpeedSword() {
+    public JumpSword() {
         super(Tiers.IRON, new Properties().stacksTo(1));
     }
 
@@ -33,7 +33,7 @@ public class AttackSpeedSword extends SwordItem {
         ManaData mana = player.getData(ManaAttachment.MANA.get());
 
         // establishes the mana cost. will have to be changed if adding something like ultimate wise
-        int cost = 80;
+        int cost = 20;
         // adds a static cooldown amount in ticks
         int cooldownTicks = 100;
         // if current mana is greater than or equal to cost, i.e. make sure enough mana for ability
@@ -45,15 +45,14 @@ public class AttackSpeedSword extends SwordItem {
                 // sets mana to correct amount
                 player.setData(ManaAttachment.MANA.get(), newMana);
 
-                // gives higher attack speed for 10 seconds
-                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 10 * 20, 2));
-
+                // gives speed 2 for 20 seconds
+                player.addEffect(new MobEffectInstance(MobEffects.JUMP, 10 * 20, 3));
 
                 // set the cooldown
                 player.getCooldowns().addCooldown(this, cooldownTicks);
 
                 AreaEffectCloud cloud = new AreaEffectCloud(level, player.getX(), player.getY() + 0.2, player.getZ());
-                cloud.setParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE);
+                cloud.setParticle(ParticleTypes.SMALL_GUST);
                 cloud.setRadius(2.0f);
                 cloud.setDuration(40);
                 cloud.setWaitTime(0);

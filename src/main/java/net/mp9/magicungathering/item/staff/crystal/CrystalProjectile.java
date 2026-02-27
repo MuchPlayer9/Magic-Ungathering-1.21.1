@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.entity;
+package net.mp9.magicungathering.item.staff.crystal;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class CrystalProjectile extends net.mp9.magicungathering.entity.TemporaryCrystal implements OwnableEntity {
+public class CrystalProjectile extends TemporaryCrystal implements OwnableEntity {
 
     // These variables store the owner's information
     private UUID ownerUUID;

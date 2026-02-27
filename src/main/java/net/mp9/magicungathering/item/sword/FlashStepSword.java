@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.item;
+package net.mp9.magicungathering.item.sword;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;

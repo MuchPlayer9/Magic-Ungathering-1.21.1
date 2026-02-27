@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.item;
+package net.mp9.magicungathering.item.staff.crystal;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.mp9.magicungathering.entity.CrystalProjectile;
 import net.mp9.magicungathering.entity.ModEntities;
 import net.mp9.magicungathering.mana.ManaAttachment;
 import net.mp9.magicungathering.mana.ManaData;
@@ -26,7 +25,7 @@ public class CrystalLauncher extends Item {
         // 1. Get the Mana Data from the player
         // Note: Replace 'ModDataTypes.MANA' with whatever your actual Mana registration name is
         float currentMana = player.getData(ManaAttachment.MANA).currentMana();
-        float manaCost = 150.0f; // Set your cost here (e.g., 150 mana points)
+        float manaCost = 120.0f; // Set cost here
 
         // 2. Check if the player has enough mana
         if (currentMana >= manaCost) {
@@ -40,7 +39,7 @@ public class CrystalLauncher extends Item {
                 crystal.setPos(player.getX(), player.getEyeY(), player.getZ());
 
                 Vec3 look = player.getLookAngle();
-                double speed = 3.5;
+                double speed = 2.5;
                 crystal.setDeltaMovement(look.x * speed, look.y * speed, look.z * speed);
 
                 level.addFreshEntity(crystal);

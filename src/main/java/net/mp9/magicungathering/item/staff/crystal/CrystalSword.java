@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.item;
+package net.mp9.magicungathering.item.staff.crystal;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
-import net.mp9.magicungathering.entity.TemporaryCrystal;
 import net.mp9.magicungathering.mana.ManaAttachment;
 import net.mp9.magicungathering.mana.ManaData;
 import net.mp9.magicungathering.entity.ModEntities;

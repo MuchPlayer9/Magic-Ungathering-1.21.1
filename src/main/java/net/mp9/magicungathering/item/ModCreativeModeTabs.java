@@ -20,7 +20,6 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.magicungathering.magic_ungathered_weapons"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.SPEED_SWORD);
-                        output.accept(ModItems.MANA_STICK);
                         output.accept(ModItems.DASH_SWORD);
                         output.accept(ModItems.FLASH_STEP_SWORD);
                         output.accept(ModItems.STRENGTH_SWORD);
@@ -28,6 +27,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CRYSTAL_SWORD);
                         output.accept(ModItems.ATTACK_SPEED_SWORD);
                         output.accept(ModItems.CRYSTAL_LAUNCHER);
+                        output.accept(ModItems.FIREBALL_STAFF);
+                        output.accept(ModItems.BASIC_MANA_STICK);
                     }).build());
 
     public static final Supplier<CreativeModeTab> MAGIC_UNGATHERED_ARMOR = CREATIVE_MODE_TAB.register("magic_ungathered_armor",
@@ -38,7 +39,16 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TIER_ONE_ROBE);
                         output.accept(ModItems.TIER_TWO_ROBE);
                         output.accept(ModItems.SLIME_BOOTS);
+                    }).build());
+
+    public static final Supplier<CreativeModeTab> MAGIC_UNGATHERED_CREATIVE = CREATIVE_MODE_TAB.register("magic_ungathered_creative",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModItems.MANA_STICK.get()))
+                    .title(Component.translatable("creativetab.magicungathering.magic_ungathered_creative"))
+                    .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModItems.MANA_STICK);
                         output.accept(ModItems.CREATIVE_LEGGINGS);
+
                     }).build());
 
     public static void register(IEventBus eventBus) {

@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.entity;
+package net.mp9.magicungathering.item.staff.crystal;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;

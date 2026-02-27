@@ -21,6 +21,14 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.TEMP_CRYSTAL.get(), EndCrystalRenderer::new);
 
         event.registerEntityRenderer(ModEntities.CRYSTAL_PROJECTILE.get(), EndCrystalRenderer::new);
+
+        // 2.0F makes the temporary fireball big above the player
+        event.registerEntityRenderer(ModEntities.TEMP_FIREBALL.get(),
+                context -> new net.mp9.magicungathering.client.renderer.BigFireballRenderer<>(context, 2.0F));
+
+        // 1.5F makes the flying projectile slightly smaller but still imposing
+        event.registerEntityRenderer(ModEntities.FIREBALL_PROJECTILE.get(),
+                context -> new net.mp9.magicungathering.client.renderer.BigFireballRenderer<>(context, 1.5F));
     }
 
     @SubscribeEvent

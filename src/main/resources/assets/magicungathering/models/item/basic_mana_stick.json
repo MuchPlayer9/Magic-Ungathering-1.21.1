@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "magicungathering:item/mana_stick"
+    "layer0": "magicungathering:item/basic_mana_stick"
   }
 }

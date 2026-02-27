@@ -1,4 +1,4 @@
-package net.mp9.magicungathering.item;
+package net.mp9.magicungathering.item.sword;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;

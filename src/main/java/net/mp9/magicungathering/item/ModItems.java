@@ -1,5 +1,6 @@
 package net.mp9.magicungathering.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,28 @@ public class ModItems {
             () -> new SpeedSword() {
         @Override
         public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-            tooltipComponents.add(Component.translatable("tooltip.magicungathering.speed_sword.tooltip"));
+            tooltipComponents.add(Component.literal("Right Click: ")
+                    .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                    .append(Component.literal("Speed Boost")
+                            .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+            tooltipComponents.add(Component.literal("Grants ")
+                    .withStyle(ChatFormatting.GRAY)
+                    .append(Component.literal("Speed 2 ")
+                            .withStyle(ChatFormatting.WHITE)
+                            .append(Component.literal("for ")
+                                    .withStyle(ChatFormatting.GRAY)
+                                    .append(Component.literal("30s")
+                                            .withStyle(ChatFormatting.GREEN)
+                                            .append(Component.literal(".")
+                                                    .withStyle(ChatFormatting.GRAY))))));
+            tooltipComponents.add(Component.literal("Mana Cost: ")
+                    .withStyle(ChatFormatting.DARK_GRAY)
+                    .append(Component.literal("30")
+                            .withStyle(ChatFormatting.DARK_AQUA)));
+            tooltipComponents.add(Component.literal("Cooldown: ")
+                    .withStyle(ChatFormatting.DARK_GRAY)
+                    .append(Component.literal("5s")
+                            .withStyle(ChatFormatting.GREEN)));
             super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         }
     });
@@ -37,7 +59,28 @@ public class ModItems {
             () -> new StrengthSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.strength_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Strength Boost")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Grants ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Strength 2 ")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal("for ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("10s")
+                                                    .withStyle(ChatFormatting.GREEN)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("50")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("5s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -46,7 +89,28 @@ public class ModItems {
             () -> new JumpSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.jump_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Jump Boost")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Grants ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Jump Boost 4 ")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal("for ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("10s")
+                                                    .withStyle(ChatFormatting.GREEN)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("20")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("5s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -55,7 +119,28 @@ public class ModItems {
             () -> new CrystalSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.crystal_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Kamikaze")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Spawns an ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("End Crystal ")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal("on the player with ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("0.5s ")
+                                                    .withStyle(ChatFormatting.GREEN)
+                                                    .append(Component.literal("before it can explode.")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("50")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("6s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -64,7 +149,18 @@ public class ModItems {
             () -> new ManaStick() {
             @Override
             public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                tooltipComponents.add(Component.translatable("tooltip.magicungathering.mana_stick.tooltip"));
+                tooltipComponents.add(Component.literal("Right Click: ")
+                        .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                        .append(Component.literal("Mana Boost")
+                                .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                tooltipComponents.add(Component.literal("Grants ")
+                        .withStyle(ChatFormatting.GRAY)
+                        .append(Component.literal("400 Mana ")
+                                .withStyle(ChatFormatting.DARK_AQUA)));
+                tooltipComponents.add(Component.literal("Cooldown: ")
+                        .withStyle(ChatFormatting.DARK_GRAY)
+                        .append(Component.literal("1s")
+                                .withStyle(ChatFormatting.GREEN)));
                 super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
             }
         });
@@ -73,7 +169,22 @@ public class ModItems {
             () -> new DashSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.dash_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Dash")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Dash ")
+                            .withStyle(ChatFormatting.WHITE)
+                            .append(Component.literal("in the direction you're facing.")
+                                    .withStyle(ChatFormatting.GRAY)));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("40")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("1s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -82,7 +193,28 @@ public class ModItems {
             () -> new FlashStepSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.flash_step_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Flash Step")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Teleport ")
+                            .withStyle(ChatFormatting.WHITE)
+                            .append(Component.literal("behind the nearest player in a 4 block radius, ")
+                                    .withStyle(ChatFormatting.GRAY)));
+                    tooltipComponents.add(Component.literal("or ")
+                            .withStyle(ChatFormatting.WHITE)
+                            .append(Component.literal("teleport ")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal("behind the nearest entity in a 10 block radius.")
+                                            .withStyle(ChatFormatting.GRAY))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("100")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("2s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -91,7 +223,28 @@ public class ModItems {
             () -> new AttackSpeedSword() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.attack_speed_sword.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Haste")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Grants ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Haste 3 ")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal("for ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("10s")
+                                                    .withStyle(ChatFormatting.GREEN)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("80")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("5s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -100,7 +253,30 @@ public class ModItems {
             () -> new CrystalLauncher() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.crystal_launcher.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Crystal Launch")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Throws an ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("End Crystal")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal(", that explodes")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal(" on contact with an entity or block, or after ")
+                                                    .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("10s")
+                                                    .withStyle(ChatFormatting.GREEN)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY)))))));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("120")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("3s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -109,7 +285,26 @@ public class ModItems {
             () -> new FireballStaff() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.fireball_staff.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Fireball")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Summon a ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("Fireball")
+                                    .withStyle(ChatFormatting.WHITE)
+                                    .append(Component.literal(" and freeze the player, right click again to shoot the fireball.")
+                                            .withStyle(ChatFormatting.GRAY))));
+                    tooltipComponents.add(Component.literal("If you take damage whilst aiming the fireball explodes, damaging you.")
+                            .withStyle(ChatFormatting.DARK_GRAY));
+                    tooltipComponents.add(Component.literal("Mana Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("60")
+                                    .withStyle(ChatFormatting.DARK_AQUA)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("idk ¯\\_(ツ)_/¯")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
@@ -118,8 +313,30 @@ public class ModItems {
             () -> new BasicManaStick() {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.basic_mana_stick.tooltip"));
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Mana Infusion")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Take ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("1 heart ")
+                                    .withStyle(ChatFormatting.DARK_RED)
+                                    .append(Component.literal("of damage and gain ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("30 Mana")
+                                                    .withStyle(ChatFormatting.DARK_AQUA)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Health Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("2")
+                                    .withStyle(ChatFormatting.DARK_RED)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("10s")
+                                    .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+
                 }
             });
 
@@ -130,7 +347,10 @@ public class ModItems {
             () -> new ArmorItem(Holder.direct(ModArmorMaterials.SLIME), ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)) {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.magicungathering.slime_boots.tooltip"));
+                    tooltipComponents.add(Component.literal("Slime block physics")
+                                    .withStyle(style -> style.withColor(ChatFormatting.GOLD)));
+                    tooltipComponents.add(Component.literal("Take no fall damage, instead you bounce. ")
+                            .withStyle(ChatFormatting.GRAY));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });

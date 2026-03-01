@@ -49,7 +49,7 @@ public class CrystalLauncher extends Item {
                         SoundEvents.ENDER_EYE_LAUNCH, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
 
-            player.getCooldowns().addCooldown(this, 20); // 1 second cooldown
+            player.getCooldowns().addCooldown(this, 60); // cooldown
             return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
         } else {
             // 5. If not enough mana, play a "Fail" sound on the client

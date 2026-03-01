@@ -13,20 +13,6 @@
   "item.magicungathering.crystal_launcher": "Crystal Staff",
   "item.magicungathering.fireball_staff": "Fireball Staff",
 
-  // item tooltips
-  "tooltip.magicungathering.speed_sword.tooltip": "§b-30 Mana§r On right click gain speed 2 for 20 seconds.",
-  "tooltip.magicungathering.strength_sword.tooltip": "§b-50 Mana§r On right click gain strength 2 for 20 seconds.",
-  "tooltip.magicungathering.jump_sword.tooltip": "§b-20 Mana§r On right click gain jump boost 4 for 10 seconds.",
-  "tooltip.magicungathering.crystal_sword.tooltip": "§b-50 Mana§r On right click, summon an end crystal on yourself, that is invulnerable for 0.3 seconds.",
-  "tooltip.magicungathering.attack_speed_sword.tooltip": "§b-80 Mana§r On right click, give haste 3 for 10 seconds.",
-  "tooltip.magicungathering.mana_stick.tooltip": "§b+400 Mana§r On right click.",
-  "tooltip.magicungathering.basic_mana_stick.tooltip": "§b+30 Mana§r On right click, but take 1 heart of damage.",
-  "tooltip.magicungathering.dash_sword.tooltip": "§b-40 Mana§r On right click, dash forwards.",
-  "tooltip.magicungathering.flash_step_sword.tooltip": "§b-100 Mana§r On right click, teleport behind the nearest player in a 8 block range, or teleport behind the nearest entity in a 20 block range.",
-  "tooltip.magicungathering.slime_boots.tooltip": "Boots with built in slime block physics.",
-  "tooltip.magicungathering.crystal_launcher.tooltip": "§b-120 Mana§r Essentially a grenade launcher but with end crystals.. explodes after hitting a block or entity or after 3 seconds.",
-  "tooltip.magicungathering.fireball_staff.tooltip": "§b-60 Mana§r On right click freeze and summon a fireball above you, right click again to shoot it in the direction you're facing.",
-
   // armor
   "item.magicungathering.tier_one_robe": "Leather Robe",
   "item.magicungathering.tier_two_robe": "Copper Robe",

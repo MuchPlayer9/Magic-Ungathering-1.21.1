@@ -2,6 +2,7 @@ package net.mp9.magicungathering.item.staff.crystal;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.mp9.magicungathering.ModDamageTypes;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -80,8 +82,25 @@ public class CrystalProjectile extends TemporaryCrystal implements OwnableEntity
     }
 
     private void explode() {
-        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.BLOCK);
-        this.discard();
+        if (!this.level().isClientSide) {
+            // 1. Create the magic damage source linked to the owner (the player)
+            // If owner is null, it still works but death messages will be generic
+            DamageSource magicSource = ModDamageTypes.source(this.level(), ModDamageTypes.SPELL, this.getOwner());
+
+            // 2. Use the overload that accepts a DamageSource
+            // This ensures the explosion damage is flagged as IS_MAGIC
+            this.level().explode(
+                    this,
+                    magicSource,
+                    null,
+                    this.getX(), this.getY(), this.getZ(),
+                    3.0F,
+                    false,
+                    Level.ExplosionInteraction.BLOCK
+            );
+
+            this.discard();
+        }
     }
 
     // Ownership implementation

@@ -16,38 +16,32 @@ public class ManaTickHandler {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
-
-        // Only run logic on the server to prevent desync
         if (player.level().isClientSide()) return;
 
         AttachmentType<ManaData> manaType = ManaAttachment.MANA.get();
         ManaData mana = player.getData(manaType);
         if (mana == null) return;
 
-        // 1. Get the dynamic Max Mana from our attribute system
-        int maxManaLimit = (int) player.getAttributeValue(ModAttributes.MAX_MANA);
+        float currentMana = mana.currentMana();
+        float maxManaLimit = (float) player.getAttributeValue(ModAttributes.MAX_MANA);
 
+        // --- SECTION 1: INSTANT CLAMPING (Runs every tick) ---
+        // This handles armor removal or abilities that set mana too high immediately.
+        if (currentMana > maxManaLimit) {
+            currentMana = maxManaLimit;
+            player.setData(manaType, new ManaData(currentMana));
+            // Force sync here if needed so the client UI updates instantly
+        }
+
+        // --- SECTION 2: REGENERATION (Runs every second) ---
         if (player.tickCount % REGEN_TICKS == 0) {
-            float currentMana = mana.currentMana();
-
-            // 2. Only regenerate if we are currently below the max
             if (currentMana < maxManaLimit) {
-                // calculate percentage regen
-                float regenAmount = (float)(maxManaLimit * 0.01);
+                float regenAmount = maxManaLimit * 0.01f; // 1% regen
 
-                // Use Math.min to ensure we don't "overshoot" the max mana
+                // Math.min is the "safety net" for the regen specifically
                 float nextManaValue = Math.min(currentMana + regenAmount, maxManaLimit);
 
-                ManaData newMana = new ManaData(nextManaValue);
-                player.setData(manaType, newMana);
-
-                // Optional: Force a sync if your attachment isn't auto-syncing on change
-                // player.syncData(manaType);
-            }
-            // 3. Optional: If player removes armor and current mana is > new max,
-            // you can choose to cap it immediately or let it drain.
-            else if (currentMana > maxManaLimit) {
-                player.setData(manaType, new ManaData(maxManaLimit));
+                player.setData(manaType, new ManaData(nextManaValue));
             }
         }
     }

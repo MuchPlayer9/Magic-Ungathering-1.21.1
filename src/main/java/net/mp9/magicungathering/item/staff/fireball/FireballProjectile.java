@@ -4,6 +4,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.mp9.magicungathering.ModDamageTypes;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -92,8 +94,9 @@ public class FireballProjectile extends TemporaryFireball implements OwnableEnti
             // Finds entities in a radius and burns them once
             this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(10.0D)).forEach(entity -> {
                 if (entity != this.getOwner() && entity.position().distanceTo(center) <= 7.0) {
+                    DamageSource spellDamage = ModDamageTypes.source(this.level(), ModDamageTypes.SPELL, this.getOwner());
                     entity.igniteForSeconds(5.0F);
-                    entity.hurt(this.damageSources().onFire(), 10.0F);
+                    entity.hurt(spellDamage, 10.0F);
                 }
             });
 

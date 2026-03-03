@@ -4,23 +4,27 @@
   "item.magicungathering.speed_sword": "Speed Sword",
   "item.magicungathering.strength_sword": "Strength Sword",
   "item.magicungathering.jump_sword": "Jump Sword",
-  "item.magicungathering.mana_stick": "Creative Mana Stick",
-  "item.magicungathering.basic_mana_stick": "Basic Mana Stick",
+  "item.magicungathering.mana_stick": "Divine Mana Infusion",
+  "item.magicungathering.basic_mana_stick": "Impure Mana Infusion",
+  "item.magicungathering.medium_mana_stick": "Standard Mana Infusion",
+  "item.magicungathering.large_mana_stick": "Pure Mana Infusion",
   "item.magicungathering.dash_sword": "Dash Sword",
-  "item.magicungathering.flash_step_sword": "Flash Sword",
-  "item.magicungathering.crystal_sword": "Crystal Sword",
-  "item.magicungathering.attack_speed_sword": "Haste Sword",
+  "item.magicungathering.flash_step_sword": "Blink Dagger",
+  "item.magicungathering.crystal_sword": "Jewel Blade",
+  "item.magicungathering.attack_speed_sword": "Rapier",
   "item.magicungathering.crystal_launcher": "Crystal Staff",
   "item.magicungathering.fireball_staff": "Fireball Staff",
 
   // armor
-  "item.magicungathering.tier_one_robe": "Leather Robe",
-  "item.magicungathering.tier_two_robe": "Copper Robe",
-  "item.magicungathering.tier_three_robe": "Gold Robe",
-  "item.magicungathering.tier_four_robe": "Chainmail Robe",
-  "item.magicungathering.tier_five_robe": "Iron Robe",
-  "item.magicungathering.tier_six_robe": "Diamond Robe",
-  "item.magicungathering.tier_seven_robe": "Netherite Robe",
+  "item.magicungathering.tier_one_hat": "Diamond Wizard Hat",
+  "item.magicungathering.tier_two_hat": "Netherite Wizard Hat",
+  "item.magicungathering.tier_one_robe": "Diamond Wizard Robe",
+  "item.magicungathering.tier_two_robe": "Netherite Wizard Robe",
+  "item.magicungathering.tier_one_leggings": "Diamond Wizard Pants",
+  "item.magicungathering.tier_two_leggings": "Netherite Wizard Pants",
+  "item.magicungathering.tier_one_boots": "Diamond Wizard Boots",
+  "item.magicungathering.tier_two_boots": "Netherite Wizard Boots",
+
   "item.magicungathering.slime_boots": "Slime Boots",
   "item.magicungathering.creative_leggings": "Creative Leggings",
 
@@ -30,5 +34,9 @@
   "creativetab.magicungathering.magic_ungathered_creative": "Magic Ungathering Creative",
 
   // attributes
-  "attribute.name.magicungathering.max_mana": "Max Mana"
+  "attribute.name.magicungathering.max_mana": "Max Mana",
+
+  // spell damage
+  "death.attack.magic_spell": "%1$s was incinerated by %2$s's magic",
+  "death.attack.magic_spell.item": "%1$s was incinerated by %2$s using %3$s"
 }

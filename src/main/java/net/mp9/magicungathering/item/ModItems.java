@@ -11,10 +11,14 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.mp9.magicungathering.MagicUngathering;
 import net.mp9.magicungathering.attributes.ModAttributes;
+import net.mp9.magicungathering.item.infusions.LargeManaStick;
 import net.mp9.magicungathering.item.staff.fireball.FireballStaff;
 import net.mp9.magicungathering.item.sword.*;
 import net.mp9.magicungathering.item.staff.crystal.CrystalLauncher;
 import net.mp9.magicungathering.item.staff.crystal.CrystalSword;
+import net.mp9.magicungathering.item.infusions.BasicManaStick;
+import net.mp9.magicungathering.item.infusions.ManaStick;
+import net.mp9.magicungathering.item.infusions.MediumManaStick;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -195,7 +199,7 @@ public class ModItems {
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.literal("Right Click: ")
                             .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
-                            .append(Component.literal("Flash Step")
+                            .append(Component.literal("Blink")
                                     .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
                     tooltipComponents.add(Component.literal("Teleport ")
                             .withStyle(ChatFormatting.WHITE)
@@ -310,12 +314,12 @@ public class ModItems {
             });
 
     public static final DeferredItem<Item> BASIC_MANA_STICK = ITEMS.register("basic_mana_stick",
-            () -> new BasicManaStick() {
+            () -> new BasicManaStick(new Item.Properties().durability(32)) {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.literal("Right Click: ")
                             .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
-                            .append(Component.literal("Mana Infusion")
+                            .append(Component.literal("Basic Mana Infusion")
                                     .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
                     tooltipComponents.add(Component.literal("Take ")
                             .withStyle(ChatFormatting.GRAY)
@@ -323,7 +327,7 @@ public class ModItems {
                                     .withStyle(ChatFormatting.DARK_RED)
                                     .append(Component.literal("of damage and gain ")
                                             .withStyle(ChatFormatting.GRAY)
-                                            .append(Component.literal("30 Mana")
+                                            .append(Component.literal("10 Mana")
                                                     .withStyle(ChatFormatting.DARK_AQUA)
                                                     .append(Component.literal(".")
                                                             .withStyle(ChatFormatting.GRAY))))));
@@ -337,14 +341,71 @@ public class ModItems {
                                     .withStyle(ChatFormatting.GREEN)));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-                }
-            });
+                }});
 
+    public static final DeferredItem<Item> MEDIUM_MANA_STICK = ITEMS.register("medium_mana_stick",
+            () -> new MediumManaStick(new Item.Properties().durability(32)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Medium Mana Infusion")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Take ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("2 hearts ")
+                                    .withStyle(ChatFormatting.DARK_RED)
+                                    .append(Component.literal("of damage and gain ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("30 Mana")
+                                                    .withStyle(ChatFormatting.DARK_AQUA)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Health Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("4")
+                                    .withStyle(ChatFormatting.DARK_RED)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("10s")
+                                    .withStyle(ChatFormatting.GREEN)));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
+                }});
+
+    public static final DeferredItem<Item> LARGE_MANA_STICK = ITEMS.register("large_mana_stick",
+            () -> new LargeManaStick(new Item.Properties().durability(32)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.literal("Right Click: ")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
+                            .append(Component.literal("Large Mana Infusion")
+                                    .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GOLD))));
+                    tooltipComponents.add(Component.literal("Take ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal("3 hearts ")
+                                    .withStyle(ChatFormatting.DARK_RED)
+                                    .append(Component.literal("of damage and gain ")
+                                            .withStyle(ChatFormatting.GRAY)
+                                            .append(Component.literal("50 Mana")
+                                                    .withStyle(ChatFormatting.DARK_AQUA)
+                                                    .append(Component.literal(".")
+                                                            .withStyle(ChatFormatting.GRAY))))));
+                    tooltipComponents.add(Component.literal("Health Cost: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("6")
+                                    .withStyle(ChatFormatting.DARK_RED)));
+                    tooltipComponents.add(Component.literal("Cooldown: ")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal("10s")
+                                    .withStyle(ChatFormatting.GREEN)));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+
+                }});
 
     // armor
     public static final DeferredItem<Item> SLIME_BOOTS = ITEMS.register("slime_boots",
-            () -> new ArmorItem(Holder.direct(ModArmorMaterials.SLIME), ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)) {
+            () -> new ModRobeItem(Holder.direct(ModArmorMaterials.SLIME), ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)) {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.literal("Slime block physics")
@@ -355,51 +416,60 @@ public class ModItems {
                 }
             });
 
+    public static final DeferredItem<Item> TIER_ONE_HAT = ITEMS.register("tier_one_hat",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_ONE),
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(165).stacksTo(1) // Keep it clean!
+            ));
+
+    public static final DeferredItem<Item> TIER_TWO_HAT = ITEMS.register("tier_two_hat",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_TWO),
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(363).stacksTo(1)
+            ));
+
+    // TIER ONE SET
     public static final DeferredItem<Item> TIER_ONE_ROBE = ITEMS.register("tier_one_robe",
-            () -> new ArmorItem(
+            () -> new ModRobeItem(
                     Holder.direct(ModArmorMaterials.TIER_ONE),
                     ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties()
-                            .stacksTo(1)
-                        .attributes(ItemAttributeModifiers.builder()
-                            // add mana bonus
-                            .add(ModAttributes.MAX_MANA,
-                                    new AttributeModifier(
-                                            ResourceLocation.fromNamespaceAndPath("magicungathering", "tier_one_robe_mana_bonus"),
-                                            30.0, // the amount of extra mana
-                                            AttributeModifier.Operation.ADD_VALUE),
-                                    EquipmentSlotGroup.CHEST)
-                            // Re-add standard armor points since attributes overrides defaults
-                                    .add(Attributes.ARMOR,
-                                            new AttributeModifier(
-                                                    ResourceLocation.withDefaultNamespace("armor"),
-                                                    3.0,
-                                                    AttributeModifier.Operation.ADD_VALUE),
-                                            EquipmentSlotGroup.CHEST)
-                            .build())));
+                    new Item.Properties().durability(240).stacksTo(1)));
 
+    public static final DeferredItem<Item> TIER_ONE_LEGGINGS = ITEMS.register("tier_one_leggings",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_ONE),
+                    ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(225).stacksTo(1)));
+
+    public static final DeferredItem<Item> TIER_ONE_BOOTS = ITEMS.register("tier_one_boots",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_ONE),
+                    ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(195).stacksTo(1)));
+
+    // TIER TWO SET
     public static final DeferredItem<Item> TIER_TWO_ROBE = ITEMS.register("tier_two_robe",
-            () -> new ArmorItem(
+            () -> new ModRobeItem(
                     Holder.direct(ModArmorMaterials.TIER_TWO),
                     ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties()
-                            .stacksTo(1)
-                            .attributes(ItemAttributeModifiers.builder()
-                                    // add mana bonus
-                                    .add(ModAttributes.MAX_MANA,
-                                            new AttributeModifier(
-                                                    ResourceLocation.fromNamespaceAndPath("magicungathering", "tier_two_robe_mana_bonus"),
-                                                    50.0, // the amount of extra mana
-                                                    AttributeModifier.Operation.ADD_VALUE),
-                                            EquipmentSlotGroup.CHEST)
-                                    // Re-add standard armor points since attributes overrides defaults
-                                    .add(Attributes.ARMOR,
-                                            new AttributeModifier(
-                                                    ResourceLocation.withDefaultNamespace("armor"),
-                                                    4.0,
-                                                    AttributeModifier.Operation.ADD_VALUE),
-                                            EquipmentSlotGroup.CHEST)
-                                    .build())));
+                    new Item.Properties().durability(528).stacksTo(1)));
+
+    public static final DeferredItem<Item> TIER_TWO_LEGGINGS = ITEMS.register("tier_two_leggings",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_TWO),
+                    ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(495).stacksTo(1)));
+
+    public static final DeferredItem<Item> TIER_TWO_BOOTS = ITEMS.register("tier_two_boots",
+            () -> new ModRobeItem(
+                    Holder.direct(ModArmorMaterials.TIER_TWO),
+                    ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(429).stacksTo(1)));
+
+
+
 
     public static final DeferredItem<Item> CREATIVE_LEGGINGS = ITEMS.register("creative_leggings",
             () -> new ArmorItem(

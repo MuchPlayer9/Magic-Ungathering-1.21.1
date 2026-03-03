@@ -12,34 +12,29 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class ModArmorMaterials {
-    public static final ArmorMaterial TIER_ONE = createRobeMaterial("tier_one_robe");
-    public static final ArmorMaterial TIER_TWO = createRobeMaterial("tier_two_robe");
-    public static final ArmorMaterial SLIME = createRobeMaterial("slime_boots");
-    public static final ArmorMaterial CREATIVE = createRobeMaterial("creative_leggings");
+    // Tier 1 & 2
+    public static final ArmorMaterial TIER_ONE = createRobeMaterial("tier_one_robe", 2, 6, 7, 3);
+    public static final ArmorMaterial TIER_TWO = createRobeMaterial("tier_two_robe", 3, 6, 8, 3);
 
-    private static ArmorMaterial createRobeMaterial(String textureName) {
+    // Specialty Pieces
+    // Slime: 2 Armor (Boots) | Creative: 6 Armor (Leggings)
+    public static final ArmorMaterial SLIME = createRobeMaterial("slime_boots", 2, 0, 0, 0);
+    public static final ArmorMaterial CREATIVE = createRobeMaterial("creative_leggings", 0, 6, 0, 0);
+
+    private static ArmorMaterial createRobeMaterial(String textureName, int boots, int legs, int chest, int helm) {
         return new ArmorMaterial(
-
-    // 1. Defense Map (Boots, Leggings, Chest, Helmet)
-            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                map.put(ArmorItem.Type.BOOTS, 1);
-                map.put(ArmorItem.Type.LEGGINGS, 2);
-                map.put(ArmorItem.Type.CHESTPLATE, 3);
-                map.put(ArmorItem.Type.HELMET, 1);
-            }),
-            // 2. Enchantability
-            15,
-            // 3. Equip Sound
-            SoundEvents.ARMOR_EQUIP_LEATHER,
-            // 4. Repair Ingredient Supplier
-            () -> Ingredient.of(Items.LEATHER),
-            // 5. Texture Layers
-            List.of(new ArmorMaterial.Layer(
-                    ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, textureName),
-                    "",false
-            )),            // 6. Toughness
-            0.0F,
-            // 7. Knockback Resistance
-            0.0F
-    );
-}}
+                Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                    map.put(ArmorItem.Type.BOOTS, boots);
+                    map.put(ArmorItem.Type.LEGGINGS, legs);
+                    map.put(ArmorItem.Type.CHESTPLATE, chest);
+                    map.put(ArmorItem.Type.HELMET, helm);
+                }),
+                15,
+                SoundEvents.ARMOR_EQUIP_LEATHER,
+                () -> Ingredient.of(Items.LEATHER),
+                List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, textureName))),
+                0.0F,
+                0.0F
+        );
+    }
+}

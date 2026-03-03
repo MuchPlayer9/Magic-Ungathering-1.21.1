@@ -14,8 +14,10 @@ import net.mp9.magicungathering.entity.ModEntities;
 public class CrystalSword extends SwordItem {
 
     public CrystalSword() {
-        super(Tiers.IRON, new Properties().stacksTo(1));
+        super(Tiers.IRON, new Properties().attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F)).stacksTo(1));
     }
+
+    // hurtEnemy override removed so left-click deals standard physical damage
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
@@ -26,29 +28,24 @@ public class CrystalSword extends SwordItem {
         ItemStack stack = player.getItemInHand(hand);
         ManaData mana = player.getData(ManaAttachment.MANA.get());
 
-        int cost = 50; // Higher cost for a powerful entity
-        int cooldownTicks = 120; // 6 second cooldown
+        int cost = 50;
+        int cooldownTicks = 120;
 
         if (mana.currentMana() >= cost) {
             if (!level.isClientSide()) {
-                // Consume mana
                 ManaData newMana = mana.consume(cost);
                 player.setData(ManaAttachment.MANA.get(), newMana);
 
-                // Create the End Crystal
                 TemporaryCrystal crystal = ModEntities.TEMP_CRYSTAL.get().create(level);
                 if (crystal != null) {
-                    // Set position to the player's eye level (the "head")
-                    crystal.moveTo(player.getX(), player.getEyeY(), player.getZ(), 0, 0);
-
-                    // Optional: Remove the bedrock base if you want it floating cleanly
+                    crystal.moveTo(player.getX(), player.getEyeY() - 1.0, player.getZ(), 0, 0);
                     crystal.setShowBottom(false);
-                    //makes the crystal unbreakable, later scheduled 0.5 seconds later to make vulnerable for a grace period
                     crystal.setInvulnerable(true);
+
+                    // The crystal exists now; it will use TemporaryCrystal logic when hurt/timed out
                     level.addFreshEntity(crystal);
                 }
 
-                // Set the cooldown
                 player.getCooldowns().addCooldown(this, cooldownTicks);
             }
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());

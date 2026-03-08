@@ -16,13 +16,15 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 @EventBusSubscriber(modid = MagicUngathering.MOD_ID, value = Dist.CLIENT)
 public class ManaOverlay {
 
-    private static final ResourceLocation MANA_BAR = ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "textures/gui/mana_bar.png");
+    private static final ResourceLocation MANA_BAR = ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "textures/gui/mana_bar_full.png");
     private static final ResourceLocation CHAT_LAYER = ResourceLocation.withDefaultNamespace("chat");
 
     @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
-        event.registerBelow(CHAT_LAYER, ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "mana_bar"), (guiGraphics, partialTick) -> {
+        final ResourceLocation MANA_EMPTY = ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "textures/gui/mana_bar_empty.png");
+        final ResourceLocation MANA_FULL = ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "textures/gui/mana_bar_full.png");
 
+        event.registerBelow(CHAT_LAYER, ResourceLocation.fromNamespaceAndPath(MagicUngathering.MOD_ID, "mana_bar"), (guiGraphics, partialTick) -> {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
             if (player == null) return;
@@ -30,41 +32,61 @@ public class ManaOverlay {
             ManaData mana = player.getData(ManaAttachment.MANA.get());
             if (mana == null) return;
 
-            // 1. Fetch Dynamic Max Mana from Attribute
             int current = (int) mana.currentMana();
             int max = (int) player.getAttributeValue(ModAttributes.MAX_MANA);
-            if (max <= 0) max = 100; // Fallback to prevent division by zero
+            if (max <= 0) max = 100;
 
             int texW = 16;
             int texH = 64;
-            float scale = 2.0f;
+            float barScale = 2.0f;
 
+            // Position on screen
             int x = 10;
-            int y = mc.getWindow().getGuiScaledHeight() - (int)(texH * scale) - 10;
+            int y = mc.getWindow().getGuiScaledHeight() - (int)(texH * barScale) - 10;
 
             RenderSystem.enableBlend();
+
+            // --- BAR RENDERING ---
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().scale(scale, scale, 1.0f);
+            guiGraphics.pose().scale(barScale, barScale, 1.0f);
 
-            int sx = (int)(x / scale);
-            int sy = (int)(y / scale);
+            int sx = (int)(x / barScale);
+            int sy = (int)(y / barScale);
 
-            // 2. Draw Background (The empty frame)
-            // Assumes your background is at (0, 0) in the 16x64 texture
-            guiGraphics.blit(MANA_BAR, sx, sy, 0, 0, texW, texH, texW, texH * 2);
+            // 1. Draw the Background (Full 16x64 frame)
+            guiGraphics.blit(MANA_EMPTY, sx, sy, 0, 0, texW, texH, texW, texH);
 
-            // 3. Draw Filled Portion (From bottom to top)
-            // Assumes your filled texture is at (0, 64) in the texture file (a 16x128 total image)
+            // 2. Calculate Inner Fill
+            int border = 2; // Number of static pixels at top/bottom
+            int innerHeight = texH - (border * 2); // 60 pixels
+
             float pct = Math.min(1.0f, (float) current / max);
-            int filledHeight = (int)(texH * pct);
-            int offset = texH - filledHeight;
+            int filledInnerHeight = (int)(innerHeight * pct);
 
-            // blit parameters: (texture, x, y, uOffset, vOffset, width, height, texWidth, texHeight)
-            guiGraphics.blit(MANA_BAR, sx, sy + offset, 0, texH + offset, texW, filledHeight, texW, texH * 2);
+            // The offset now starts 2 pixels down from the top of the bar
+            int topOffset = border + (innerHeight - filledInnerHeight);
 
-            // 4. Draw Text
+            // 3. Draw the Fill
+            // We start drawing at (sy + topOffset)
+            // We sample the full texture starting at (V = topOffset)
+            if (filledInnerHeight > 0) {
+                guiGraphics.blit(MANA_FULL, sx, sy + topOffset, 0, topOffset, texW, filledInnerHeight, texW, texH);
+            }
+
+            guiGraphics.pose().popPose();
+
+            // --- START TEXT RENDERING (Custom Size) ---
+            float textScale = 2.0f; // text size scale adjustment
             String text = current + " / " + max;
-            guiGraphics.drawString(mc.font, text, sx + texW + 4, sy + texH - 10, 0x00FFFF, false);
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().scale(textScale, textScale, 1.0f);
+
+            // Position the text relative to the scaled bar's width
+            int textX = (int)((x + (int)(texW * barScale) + 8) / textScale);
+            int textY = (int)((y + (int)(texH * barScale) - 15) / textScale);
+
+            guiGraphics.drawString(mc.font, text, textX, textY, 0x00FFFF, false);
 
             guiGraphics.pose().popPose();
         });

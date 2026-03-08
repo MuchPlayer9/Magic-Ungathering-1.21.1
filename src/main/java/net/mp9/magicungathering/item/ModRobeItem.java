@@ -81,7 +81,7 @@ public class ModRobeItem extends ArmorItem {
         tooltipComponents.add(Component.literal("Set Bonus: Spell Shield")
                 .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
 
-        // Description - Shows 50% for Tier 2 pieces, but notes that mixed sets work.
+        // Description - Shows 30% for Tier 2 pieces, but notes that mixed sets work.
         int percent = (this.getMaterial().value() == ModArmorMaterials.TIER_TWO) ? 30 : 15;
 
         tooltipComponents.add(Component.literal("Wearing any full robe set reduces ")

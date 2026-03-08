@@ -96,7 +96,7 @@ public class FireballProjectile extends TemporaryFireball implements OwnableEnti
                 if (entity != this.getOwner() && entity.position().distanceTo(center) <= 7.0) {
                     DamageSource spellDamage = ModDamageTypes.source(this.level(), ModDamageTypes.SPELL, this.getOwner());
                     entity.igniteForSeconds(5.0F);
-                    entity.hurt(spellDamage, 10.0F);
+                    entity.hurt(spellDamage, 20.0F);
                 }
             });
 

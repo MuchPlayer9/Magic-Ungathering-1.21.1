@@ -35,7 +35,7 @@ public class FireballStaff extends Item {
             TemporaryFireball existingBall = balls.get(0);
             if (!level.isClientSide()) {
                 Vec3 look = player.getLookAngle();
-                double speed = 1.8;
+                double speed = 2.2;
 
                 FireballProjectile projectile = new FireballProjectile(ModEntities.FIREBALL_PROJECTILE.get(), level);
                 projectile.setOwner(player);

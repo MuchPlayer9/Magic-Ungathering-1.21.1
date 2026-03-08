@@ -36,7 +36,7 @@ public class ManaTickHandler {
         // --- SECTION 2: REGENERATION (Runs every second) ---
         if (player.tickCount % REGEN_TICKS == 0) {
             if (currentMana < maxManaLimit) {
-                float regenAmount = maxManaLimit * 0.01f; // 1% regen
+                float regenAmount = maxManaLimit * 0.02f; // % regen
 
                 // Math.min is the "safety net" for the regen specifically
                 float nextManaValue = Math.min(currentMana + regenAmount, maxManaLimit);

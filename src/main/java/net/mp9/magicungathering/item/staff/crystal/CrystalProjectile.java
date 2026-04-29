@@ -6,63 +6,75 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.mp9.magicungathering.ModDamageTypes;
+import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
-public class CrystalProjectile extends TemporaryCrystal implements OwnableEntity {
+public class CrystalProjectile extends TemporaryCrystal implements ItemSupplier {
 
-    // These variables store the owner's information
-    private UUID ownerUUID;
-    private int ownerId;
+    @Override
+    public ItemStack getItem() {
+        return new ItemStack(Items.END_CRYSTAL);
+    }
 
-    public CrystalProjectile(EntityType<? extends EndCrystal> type, Level level) {
+    @Nullable
+    private Entity owner;
+
+    public CrystalProjectile(EntityType<? extends net.minecraft.world.entity.boss.enderdragon.EndCrystal> type, Level level) {
         super(type, level);
-        this.setShowBottom(false); // Removes the bedrock base
+        this.setShowBottom(false);
         this.noPhysics = true;
+    }
+
+    public void setOwner(@Nullable Entity owner) {
+        this.owner = owner;
+    }
+
+    @Nullable
+    public Entity getOwner() {
+        return this.owner;
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        // Move the Gravity and Position logic OUTSIDE the isClientSide check
         Vec3 movement = this.getDeltaMovement();
-        double gravity = 0.05; // gravity strength (the lower the lighter)
-        double drag = 0.99; // air resistance (1 is none)
-
-        double newY = movement.y - gravity;
-        Vec3 newMovement = new Vec3(movement.x * drag, newY * drag, movement.z * drag);
-        this.setDeltaMovement(newMovement);
-
-        // Update position on BOTH server and client
-        this.setPos(this.getX() + newMovement.x, this.getY() + newMovement.y, this.getZ() + newMovement.z);
+        double gravity = 0.05;
+        double drag = 0.99;
+        Vec3 nextMovement = new Vec3(movement.x * drag, (movement.y - gravity) * drag, movement.z * drag);
+        this.setDeltaMovement(nextMovement);
 
         if (!this.level().isClientSide) {
-            // ONLY keep Collision and Explosion logic inside the Server check
             HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, entity ->
-                    !entity.isSpectator() && entity.isPickable() && entity != this.getOwner()
+                    !entity.isSpectator() && entity.isPickable()
             );
 
             if (hitresult.getType() != HitResult.Type.MISS) {
-                this.onHit(hitresult);
+                this.setPos(hitresult.getLocation());
+                this.explode();
                 return;
             }
 
-            if (this.tickCount > 60) {
+            if (this.level().getBlockState(this.blockPosition()).isSolid()) {
                 this.explode();
+                return;
             }
+
+            if (this.tickCount > 60) this.explode();
         } else {
-            // Client-side particles
             this.level().addParticle(ParticleTypes.END_ROD, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
         }
+
+        this.setPos(this.getX() + nextMovement.x, this.getY() + nextMovement.y, this.getZ() + nextMovement.z);
     }
 
     @Override
@@ -83,49 +95,25 @@ public class CrystalProjectile extends TemporaryCrystal implements OwnableEntity
 
     private void explode() {
         if (!this.level().isClientSide) {
-            // 1. Create the magic damage source linked to the owner (the player)
-            // If owner is null, it still works but death messages will be generic
-            DamageSource magicSource = ModDamageTypes.source(this.level(), ModDamageTypes.SPELL, this.getOwner());
+            Vec3 blastPos = this.position().add(0, 0.5, 0);
+            if (owner != null) {
+                Vec3 toOwner = owner.getEyePosition().subtract(this.position()).normalize();
+                blastPos = blastPos.add(toOwner.scale(0.5));
+            }
 
-            // 2. Use the overload that accepts a DamageSource
-            // This ensures the explosion damage is flagged as IS_MAGIC
+            DamageSource magicSource = this.level().damageSources().source(ModDamageTypes.SPELL, this.getOwner());
+
             this.level().explode(
                     this,
                     magicSource,
                     null,
-                    this.getX(), this.getY(), this.getZ(),
-                    3.0F,
+                    blastPos.x, blastPos.y, blastPos.z,
+                    6.0F,
                     false,
                     Level.ExplosionInteraction.BLOCK
             );
 
             this.discard();
         }
-    }
-
-    // Ownership implementation
-    public void setOwner(@Nullable Entity entity) {
-        if (entity != null) {
-            this.ownerUUID = entity.getUUID();
-            this.ownerId = entity.getId();
-        }
-    }
-
-    @Nullable
-    @Override
-    public LivingEntity getOwner() {
-        if (this.ownerUUID != null && this.level() instanceof ServerLevel serverLevel) {
-            Entity entity = serverLevel.getEntity(this.ownerUUID);
-            if (entity instanceof LivingEntity living) {
-                return living;
-            }
-        }
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public UUID getOwnerUUID() {
-        return this.ownerUUID;
     }
 }

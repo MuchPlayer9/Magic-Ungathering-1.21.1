@@ -15,22 +15,22 @@ public class SlimeBootsHandler {
 
     @SubscribeEvent
     public static void onFall(LivingFallEvent event) {
-        if (event.getEntity() instanceof Player player) {
+        if (event.getEntity() instanceof Player player) { // this probs needs to be changed to allow mobs to use them too
             ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 
             // Check if the player is wearing your specific boots
             if (boots.is(ModItems.SLIME_BOOTS.get())) {
-                // 1. Cancel fall damage entirely
+                // Cancel fall damage entirely
                 event.setDamageMultiplier(0);
 
-                // 2. Apply the "Bounce" logic
+                // Apply the bounce logic
                 // Only bounce if they fell more than 1 blocks to prevent jitter
                 if (event.getDistance() > 1.0F && !player.isShiftKeyDown()) {
                     double bounceVelocity = Math.min(event.getDistance() * 0.14D, 1.4D);
                     player.setDeltaMovement(player.getDeltaMovement().x, bounceVelocity, player.getDeltaMovement().z);
                     player.hurtMarked = true; // Syncs movement to the client
 
-                    // 3. Play the slime sound
+                    // play the slime sound
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                             SoundEvents.SLIME_BLOCK_FALL, player.getSoundSource(), 1.0F, 1.0F);
                 }

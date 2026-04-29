@@ -18,7 +18,7 @@ import net.mp9.magicungathering.ModDamageTypes;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class FireballProjectile extends TemporaryFireball implements OwnableEntity, ItemSupplier {
+public class FireballProjectile extends TemporaryFireball implements ItemSupplier {
 
     @Override
     public ItemStack getItem() {
@@ -26,6 +26,7 @@ public class FireballProjectile extends TemporaryFireball implements OwnableEnti
     }
 
     private UUID ownerUUID;
+    private LivingEntity cachedOwner;
 
     public FireballProjectile(EntityType<? extends FireballProjectile> type, Level level) {
         super(type, level);
@@ -71,36 +72,34 @@ public class FireballProjectile extends TemporaryFireball implements OwnableEnti
                     center.x, center.y, center.z,
                     1, 0, 0, 0, 0);
 
-            // 1. HIGH-DENSITY "CONTAINED" BURST
-            // second number is particle count
             for (int i = 0; i < 1200; i++) {
                 double theta = this.random.nextDouble() * 2 * Math.PI;
                 double phi = Math.acos(2 * this.random.nextDouble() - 1);
-
-                // SPEED of particles
                 double speed = 0.35 + this.random.nextDouble() * 0.35;
 
                 double vx = speed * Math.sin(phi) * Math.cos(theta);
                 double vy = speed * Math.sin(phi) * Math.sin(theta);
                 double vz = speed * Math.cos(phi);
 
-                // Using count 0 so vx/vy/vz act as direction + velocity
                 serverLevel.sendParticles(ParticleTypes.FLAME,
                         center.x, center.y, center.z,
                         0, vx, vy, vz, 1.0);
             }
 
-            // 2. IMMEDIATE RADIUS DAMAGE
-            // Finds entities in a radius and burns them once
             this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(10.0D)).forEach(entity -> {
-                if (entity != this.getOwner() && entity.position().distanceTo(center) <= 7.0) {
-                    DamageSource spellDamage = ModDamageTypes.source(this.level(), ModDamageTypes.SPELL, this.getOwner());
-                    entity.igniteForSeconds(5.0F);
-                    entity.hurt(spellDamage, 20.0F);
+                LivingEntity owner = this.getOwner();
+                if (entity != owner && entity.position().distanceTo(center) <= 7.0) {
+                    DamageSource magicSource;
+                    if (owner != null) {
+                        magicSource = this.level().damageSources().source(ModDamageTypes.SPELL, this, owner);
+                    } else {
+                        magicSource = this.level().damageSources().source(ModDamageTypes.SPELL, this);
+                    }
+                    entity.igniteForSeconds(8.0F);
+                    entity.hurt(magicSource, 20.0F);
                 }
             });
 
-            // 3. EXPLOSION SOUND
             this.level().playSound(null, center.x, center.y, center.z,
                     SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, SoundSource.BLOCKS, 4.0F, 0.7F);
 
@@ -109,26 +108,26 @@ public class FireballProjectile extends TemporaryFireball implements OwnableEnti
     }
 
     public void setOwner(@Nullable Entity entity) {
-        if (entity != null) {
+        if (entity instanceof LivingEntity living) {
             this.ownerUUID = entity.getUUID();
+            this.cachedOwner = living;
         }
     }
 
     @Nullable
     @Override
     public LivingEntity getOwner() {
+        if (this.cachedOwner != null && !this.cachedOwner.isRemoved()) {
+            return this.cachedOwner;
+        }
+
         if (this.ownerUUID != null && this.level() instanceof ServerLevel serverLevel) {
             Entity entity = serverLevel.getEntity(this.ownerUUID);
             if (entity instanceof LivingEntity living) {
+                this.cachedOwner = living;
                 return living;
             }
         }
         return null;
-    }
-
-    @Nullable
-    @Override
-    public UUID getOwnerUUID() {
-        return this.ownerUUID;
     }
 }

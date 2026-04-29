@@ -37,6 +37,27 @@
   "attribute.name.magicungathering.max_mana": "Max Mana",
 
   // spell damage
-  "death.attack.magic_spell": "%1$s was incinerated by %2$s's magic",
-  "death.attack.magic_spell.item": "%1$s was incinerated by %2$s using %3$s"
+  "death.attack.spell": "%1$s was incinerated by %2$s",
+  "death.attack.spell.player": "%1$s was incinerated by %2$s",
+  "death.attack.spell.item": "%1$s was incinerated by %2$s",
+  "death.attack.spell.item.proxy": "%1$s was incinerated by %2$s",
+  "death.attack.spell.proxy": "%1$s was incinerated by %2$s",
+
+  // entities
+  "entity.magicungathering.fireball_projectile": "Fireball",
+
+  // Keybinds
+  "key.category.magicungathering.spells": "Magic Ungathering",
+
+  "key.magicungathering.open_skill_tree_menu": "Open Skill Tree",
+  "key.magicungathering.movement": "Movement Ability",
+  "key.magicungathering.ability_1": "Ability 1",
+  "key.magicungathering.ability_2": "Ability 2",
+  "key.magicungathering.ability_3": "Ability 3",
+
+  // effects
+  "effect.magicungathering.brittle_bones": "Brittle Bones",
+  "effect.magicungathering.speed_boost_timer": "Speed Boost",
+  "effect.magicungathering.bleeding": "Bleeding",
+  "effect.magicungathering.haemorrhage_window": "Haemorrhage"
 }

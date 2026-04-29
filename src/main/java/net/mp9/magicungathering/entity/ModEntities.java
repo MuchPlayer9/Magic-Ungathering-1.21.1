@@ -16,35 +16,51 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES =
             DeferredRegister.create(Registries.ENTITY_TYPE, MagicUngathering.MOD_ID);
 
-    // This is the reference for the crystal sword code and crystal staff
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = ENTITIES;
+
+    // --- SMOKE SCREEN ---
+    public static final DeferredHolder<EntityType<?>, EntityType<SmokeGrenadeEntity>> SMOKE_GRENADE =
+            ENTITIES.register("smoke_grenade",
+                    () -> EntityType.Builder.<SmokeGrenadeEntity>of(SmokeGrenadeEntity::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(4)
+                            .updateInterval(10)
+                            .build("smoke_grenade"));
+
+    // --- CRYSTAL STAFF & SWORD ---
     public static final DeferredHolder<EntityType<?>, EntityType<TemporaryCrystal>> TEMP_CRYSTAL =
             ENTITIES.register("temporary_crystal",
                     () -> EntityType.Builder.of(TemporaryCrystal::new, MobCategory.MISC)
-                            .sized(2.0f, 2.0f) // Matches standard End Crystal size
+                            .sized(2.0f, 2.0f)
                             .build("temporary_crystal"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<CrystalProjectile>> CRYSTAL_PROJECTILE =
             ENTITIES.register("crystal_projectile",
                     () -> EntityType.Builder.<CrystalProjectile>of(CrystalProjectile::new, MobCategory.MISC)
-                            .sized(1.0F, 1.0F) // Set the hit-box size
-                            .clientTrackingRange(25) // how far away it stays visible
-                            .updateInterval(1) // update every tick
+                            .sized(1.0F, 1.0F)
+                            .clientTrackingRange(25)
+                            .updateInterval(1)
                             .build("crystal_projectile"));
 
-    // This is the reference for the fireball staff
+    // --- FIREBALL STAFF ---
     public static final DeferredHolder<EntityType<?>, EntityType<TemporaryFireball>> TEMP_FIREBALL =
             ENTITIES.register("temporary_fireball",
                     () -> EntityType.Builder.of(TemporaryFireball::new, MobCategory.MISC)
-                            .sized(1.0f, 1.0f) // changes fireball size
+                            .sized(1.0f, 1.0f)
                             .build("temporary_fireball"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<FireballProjectile>> FIREBALL_PROJECTILE =
             ENTITIES.register("fireball_projectile",
                     () -> EntityType.Builder.<FireballProjectile>of(FireballProjectile::new, MobCategory.MISC)
-                            .sized(1.5F, 1.5F) // Set the hit-box size
-                            .clientTrackingRange(50) // how far away it stays visible
-                            .updateInterval(1) // update every tick
+                            .sized(1.5F, 1.5F)
+                            .clientTrackingRange(50)
+                            .updateInterval(1)
                             .build("fireball_projectile"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SmokeCloudEntity>> SMOKE_CLOUD =
+            ENTITIES.register("smoke_cloud", () -> EntityType.Builder.of(SmokeCloudEntity::new, MobCategory.MISC)
+                    .sized(5.0f, 5.0f) // size of smoke cloud
+                    .build("smoke_cloud"));
 
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);

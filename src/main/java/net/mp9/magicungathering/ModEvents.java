@@ -21,6 +21,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void onAttributeModification(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, ModAttributes.MAX_MANA);
+        event.add(EntityType.PLAYER, ModAttributes.MANA_REGEN);
     }
 
     @SubscribeEvent

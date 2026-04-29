@@ -36,7 +36,7 @@ public class CrystalLauncher extends Item {
                 // 4. Your existing crystal spawning logic
                 CrystalProjectile crystal = new CrystalProjectile(ModEntities.CRYSTAL_PROJECTILE.get(), level);
                 crystal.setOwner(player);
-                crystal.setPos(player.getX(), player.getEyeY(), player.getZ());
+                crystal.setPos(player.getX(), player.getEyeY() - 0.5, player.getZ());
 
                 Vec3 look = player.getLookAngle();
                 double speed = 2.5;

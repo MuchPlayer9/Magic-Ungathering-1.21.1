@@ -25,22 +25,22 @@ public class ManaTickHandler {
         float currentMana = mana.currentMana();
         float maxManaLimit = (float) player.getAttributeValue(ModAttributes.MAX_MANA);
 
-        // --- SECTION 1: INSTANT CLAMPING (Runs every tick) ---
-        // This handles armor removal or abilities that set mana too high immediately.
+        // Fetch the regen rate from the new attribute (Default 0.02)
+        float regenRate = (float) player.getAttributeValue(ModAttributes.MANA_REGEN);
+
+        // --- SECTION 1: INSTANT CLAMPING ---
         if (currentMana > maxManaLimit) {
             currentMana = maxManaLimit;
             player.setData(manaType, new ManaData(currentMana));
-            // Force sync here if needed so the client UI updates instantly
         }
 
-        // --- SECTION 2: REGENERATION (Runs every second) ---
+        // --- SECTION 2: REGENERATION ---
         if (player.tickCount % REGEN_TICKS == 0) {
             if (currentMana < maxManaLimit) {
-                float regenAmount = maxManaLimit * 0.02f; // % regen
+                // Now uses the dynamic attribute value
+                float regenAmount = maxManaLimit * regenRate;
 
-                // Math.min is the "safety net" for the regen specifically
                 float nextManaValue = Math.min(currentMana + regenAmount, maxManaLimit);
-
                 player.setData(manaType, new ManaData(nextManaValue));
             }
         }

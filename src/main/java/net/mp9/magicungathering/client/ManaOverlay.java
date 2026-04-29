@@ -75,7 +75,7 @@ public class ManaOverlay {
 
             guiGraphics.pose().popPose();
 
-            // --- START TEXT RENDERING (Custom Size) ---
+            // text rendering
             float textScale = 2.0f; // text size scale adjustment
             String text = current + " / " + max;
 

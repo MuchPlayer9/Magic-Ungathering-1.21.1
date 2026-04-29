@@ -4,60 +4,91 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
+import net.mp9.magicungathering.ModEffects;
 import net.mp9.magicungathering.mana.ManaAttachment;
 import net.mp9.magicungathering.mana.ManaData;
 
+import java.util.Optional;
 
-// defines the speed sword as a sword item
 public class SpeedSword extends SwordItem {
 
-    // sets the tier of the sword to iron and max stack size to 1
     public SpeedSword() {
         super(Tiers.IRON, new Item.Properties().stacksTo(1));
     }
 
     @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+
+        // Base Sword Stats: +6 Attack Damage (Diamond level)
+        builder.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(
+                        BASE_ATTACK_DAMAGE_ID, 6.0, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND);
+
+        // Standard sword swing speed (-2.4 results in 1.6 total)
+        builder.add(Attributes.ATTACK_SPEED, new AttributeModifier(
+                        BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND);
+
+        return builder.build();
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 10;
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (player.getCooldowns().isOnCooldown(this)) {
-            return InteractionResultHolder.fail(player.getItemInHand(hand));
-        }
         ItemStack stack = player.getItemInHand(hand);
 
+        if (player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.fail(stack);
+        }
+
         ManaData mana = player.getData(ManaAttachment.MANA.get());
-
-        // establishes the mana cost. will have to be changed if adding something like ultimate wise
         int cost = 30;
-        // adds a static cooldown amount in ticks
         int cooldownTicks = 100;
-        // if current mana is greater than or equal to cost, i.e. make sure enough mana for ability
+
         if (mana.currentMana() >= cost) {
-            // logic for server side
             if (!level.isClientSide()) {
-                // consumes the mana
-                ManaData newMana = mana.consume(cost);
-                // sets mana to correct amount
-                player.setData(ManaAttachment.MANA.get(), newMana);
+                // 1. Consume Mana
+                player.setData(ManaAttachment.MANA.get(), mana.consume(cost));
 
-                // gives speed 2 for 20 seconds
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 20, 1));
+                // 2. Apply Custom Timer Effect (HIDDEN)
+                // We pass 'false' for visible and 'false' for showIcon.
+                // This makes it act exactly like a direct attribute change.
+                player.addEffect(new MobEffectInstance(
+                        ModEffects.SPEED_BOOST_TIMER,
+                        400,   // 20 seconds
+                        0,     // Level 1 (Amplifier)
+                        false, // isAmbient
+                        false, // visible (No particles)
+                        false  // showIcon (No HUD icon)
+                ));
 
-                // set the cooldown
+                // 3. Set Cooldown
                 player.getCooldowns().addCooldown(this, cooldownTicks);
 
+                // 4. Visual Effects (Manual particles since we hid the effect ones)
                 AreaEffectCloud cloud = new AreaEffectCloud(level, player.getX(), player.getY() + 0.2, player.getZ());
                 cloud.setParticle(ParticleTypes.ELECTRIC_SPARK);
                 cloud.setRadius(2.0f);
                 cloud.setDuration(40);
                 cloud.setWaitTime(0);
                 level.addFreshEntity(cloud);
-
             }
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
         }
-        return InteractionResultHolder.pass(stack);
+
+        return InteractionResultHolder.fail(stack);
     }
 }
